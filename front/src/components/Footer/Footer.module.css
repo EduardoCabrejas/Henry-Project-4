@@ -1,0 +1,24 @@
+@media (min-width: 768px) {
+.sites {
+    padding: 0.4rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: #313164;
+    border: solid #137eff 2px;
+    border-radius: 1rem;
+  }
+}
+
+.sites {
+  padding: 0.4rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #313164;
+  border: solid #137eff 2px;
+  border-radius: 1rem;
+}
+  
+  .sites:hover {
+  transition: 1s;
+    background-color: #002a62;
+}

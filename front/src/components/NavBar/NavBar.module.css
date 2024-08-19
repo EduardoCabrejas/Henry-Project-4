@@ -1,0 +1,24 @@
+.link {
+    text-align: center;
+    text-wrap: nowrap;
+    background-color: #313164;
+    font-size: 0.5rem;
+    line-height: 1.25rem;
+    border: solid #137eff 1px;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .link{
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+}
+
+.link:hover {
+    transition: 0.5s;
+    background-color: #002a62;
+    color: #137eff;
+}

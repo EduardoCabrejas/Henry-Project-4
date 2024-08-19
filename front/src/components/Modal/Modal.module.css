@@ -1,0 +1,7 @@
+.closeButton {
+  @apply m-auto w-1/2 text-2xl p-2 bg-red-600 border-2 border-lightblue1 rounded-md transition-colors duration-500 hover:bg-gradient-to-r from-red-400 via-red-600 to-red-400;
+}
+
+.acceptButton {
+  @apply m-2 w-1/2 text-2xl p-2 bg-green-950 text-lightblue1 border-2 border-lightviolet rounded-md transition-colors duration-500 hover:bg-gradient-to-r from-lightblue2 via-darkblue1 to-lightblue2;
+}

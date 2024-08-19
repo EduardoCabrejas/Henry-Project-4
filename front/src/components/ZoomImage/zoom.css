@@ -1,0 +1,35 @@
+/* zoom.css */
+.zoom-container {
+  position: relative;
+  display: inline-block;
+}
+
+.zoom-lens,
+.zoom-result {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .zoom-container:hover .zoom-lens {
+    display: block;
+    position: absolute;
+    border: 1px solid cyan;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100px; /* Ajustar el tamaño del lente */
+    height: 100px; /* Ajustar el tamaño del lente */
+    cursor: zoom-in; /* Mostrar el lente cuando se pasa el cursor sobre el contenedor */
+  }
+
+  .zoom-container:hover .zoom-result {
+    display: block;
+    border: 1px solid #00b7ff;
+    width: 25rem; /* Ajustar el tamaño del resultado del zoom */
+    height: 400px; /* Ajustar el tamaño del resultado del zoom */
+    position: absolute;
+    top: 0;
+    left: 120%;
+    background-repeat: no-repeat;
+    background-color: #0e1346;
+    overflow: hidden; /* Mostrar el resultado del zoom cuando se pasa el cursor sobre el contenedor */
+  }
+}

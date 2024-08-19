@@ -1,0 +1,11 @@
+.data {
+    @apply m-2 text-violet-400 text-xl underline;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 0.1px;
+}
+
+.info {
+    @apply m-2 text-lightblue1 text-xl;
+    -webkit-text-stroke-color: blueviolet;
+    -webkit-text-stroke-width: 0.1px;
+}

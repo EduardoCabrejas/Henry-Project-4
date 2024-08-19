@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+main {
+  flex-grow: 1;
+}
+
+.stroke-lb {
+  -webkit-text-stroke: 0.5px #137eff; /* A thicker stroke */
+}
+.stroke-b{
+  -webkit-text-stroke: 0.5px #0004ff; /* Stroke with a different color */
+}
+.stroke-dv {
+  -webkit-text-stroke: 0.5px #1b005a; /* Adjust the width and color of the stroke as needed */
+}
+
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #16a34a, #395ab4);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+label {
+  @apply text-lg;
+  @apply text-center;
+  @apply p-2;
+}
+
+input{
+  @apply mb-2;
+  @apply p-1;
+  @apply relative;
+  @apply w-full;
+  @apply border-2;
+  @apply border-darkblue2;
+  @apply rounded-md;
+  @apply shadow-sm;
+  @apply text-center;
+  @apply text-darkviolet;
+}
+
+.errors {
+    font-family: Arial, Helvetica, sans-serif;
+    color:#e02121;
+    font-size: 1rem;
+    -webkit-text-stroke-width: 0.1px; 
+    -webkit-text-stroke-color: black;
+}
