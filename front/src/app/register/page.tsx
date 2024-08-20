@@ -118,12 +118,12 @@ const Register: React.FC = () => {
             Sign Up
           </h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Nombre:</label>
+            <label htmlFor="name">Name:</label>
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Nombre"
+              placeholder="Name"
               value={formData.name}
               onChange={handleFormChange}
               required
@@ -180,7 +180,7 @@ const Register: React.FC = () => {
               <p className="errors">{errors.phone}</p>
             )}
 
-            <label htmlFor="password">Contraseña:</label>
+            <label htmlFor="password">Password:</label>
             <div className="flex items-center justify-center">
               <input
                 type={showPassword ? "text" : "password"}

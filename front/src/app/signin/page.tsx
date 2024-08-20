@@ -83,7 +83,7 @@ const Login: React.FC = () => {
     <div className="flex flex-col justify-center items-center p-2 w-full">
       <div className="bg-darkblue1 m-2 p-2 rounded-sm border-2 border-lightblue1 w-80% md:w-1/2 flex flex-col justify-center items-center">
         <h1 className="mb-4 text-center text-lightblue1 font-bold underline lg:text-3xl md:text-xl sm:text-lg">
-          Iniciar Sesión
+          Sign In
         </h1>
         <form className="" onSubmit={handleSubmit}>
           <label htmlFor="email">E-mail:</label>
@@ -99,7 +99,7 @@ const Login: React.FC = () => {
           />
           {errors.email && <p className="errors">{errors.email}</p>}
 
-          <label htmlFor="password">Contraseña:</label>
+          <label htmlFor="password">Password:</label>
           <div className="flex items-center justify-center">
             <input
               type={showPassword ? "text" : "password"}
@@ -139,7 +139,7 @@ const Login: React.FC = () => {
         onClose={() => {
           setShowErrorModal(false);
       }}
-        context="errorLogin"
+        context="errorSignIn"
       />
       <Modal
         isOpen={showSuccessModal}
@@ -147,7 +147,7 @@ const Login: React.FC = () => {
           setShowSuccessModal(false);
           window.location.href = '/home';
         }}
-        context="login"
+        context="signin"
       />
     </div>
   );

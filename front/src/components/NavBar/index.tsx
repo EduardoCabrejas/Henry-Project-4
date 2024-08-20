@@ -61,12 +61,12 @@ const NavBar: React.FC = () => {
                         <Link href="/profile" className={styles.link}>Profile</Link>
                         <Link href="/checkout" className={styles.link}>Checkout</Link>
                         <Link href="/orders" className={styles.link}>Orders</Link>
-                        <button onClick={() => setShowSuccessModal(true)} className={styles.link}>Log Out</button>
+                        <button onClick={() => setShowSuccessModal(true)} className={styles.link}>Sign Out</button>
                     </>
                 ) : (
                     <>
                         <Link href="/register" className={styles.link}>Register</Link>
-                        <Link href="/login" className={styles.link}>Log In</Link>
+                        <Link href="/signin" className={styles.link}>Sign In</Link>
                     </>
                 )}
             </div>
@@ -78,9 +78,9 @@ const NavBar: React.FC = () => {
                     localStorage.removeItem("user");
                     localStorage.removeItem("products");
                     setToken(null);
-                    window.location.href = '/login';
+                    window.location.href = '/signin';
                 }}
-                context="logout"
+                context="signout"
             />
         </div>
     );

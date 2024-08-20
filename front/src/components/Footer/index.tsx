@@ -12,7 +12,7 @@ function Footer() {
   return (
     <div className="w-full grid grid-cols-2 gap-2 bg-gradient-to-br from-darkblue2 via-lightblue2 to-darkblue1 font-semibold p-2 overflow-auto">
       <div>
-        <p className="text-lightblue1 stroke-v text-sm md:text-lg">2024 - © Todos los derechos reservados</p>
+        <p className="text-lightblue1 stroke-v text-sm md:text-lg">2024 - © All rights reserved</p>
         <h1 className="text-xs md:text-sm">About Us</h1>
         <p className="text-xs">
           We are starting our businness into the virtual world, so we hope can enjoy our website, the visual and if something is interesting for you,

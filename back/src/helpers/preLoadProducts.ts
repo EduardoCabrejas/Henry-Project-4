@@ -68,7 +68,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       "Elevate your home audio experience with the HomePod mini: immersive sound, intelligent assistant, and smart home hub make the HomePod mini the perfect addition to your home. Enjoy a world of music, news, and more with the HomePod mini.",
     image:
-      "https://scontent.xx.fbcdn.net/v/t1.15752-9/449652974_1400599057267434_6604074534518318242_n.png?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_ohc=yeKaSOb-U5cQ7kNvgHZ3eYS&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QFqEM9jXp-Vc3Nh8pj-2ybAkV6UqMuZtW8Plc775jfDuQ&oe=66B1A632",
+      "https://www.apple.com/v/homepod-mini/j/images/overview/hero_homepod_white__fbci8wwv3oi2_large.png",
     categoryId: 6,
     stock: 10,
   },
