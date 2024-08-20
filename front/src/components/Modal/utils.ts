@@ -4,11 +4,11 @@ export const ModalMessages: Record<string, ModalMessage> = {
     headerMessage: "Successful Register!",
     bodyMessage: "You will be redirected to the Login Page.",
   },
-  login: {
+  signin: {
     headerMessage: "Successful Log In!",
     bodyMessage: "You will be redirected to the Home Page.",
   },
-  logout: {
+  signout: {
     headerMessage: "Are you sure to log out?",
     bodyMessage: "You will be redirected to the Login Page.",
   },
@@ -38,7 +38,7 @@ export const ModalMessages: Record<string, ModalMessage> = {
   },
   createOrder: {
     headerMessage: "Create Order",
-    bodyMessage: "Please confirm if you want to create a purchase order with the products present"
+    bodyMessage: "Please confirm to create a purchase order with the products present"
   },
   errorOrder: {
     headerMessage: "Failed to create order",
@@ -47,7 +47,11 @@ export const ModalMessages: Record<string, ModalMessage> = {
   errorGetOrder: {
     headerMessage: "Failed to get order",
     bodyMessage: "There was an error getting the order. Please try again",
-  }
+  },
+  genericError: {
+    headerMessage: "Something went wrong",
+    bodyMessage: "An unexpected error occurred. Please try again later.",
+  },
 };
 
 export const getModalMessage = (context: string): ModalMessage => {

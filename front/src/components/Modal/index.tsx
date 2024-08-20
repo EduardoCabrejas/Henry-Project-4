@@ -5,18 +5,18 @@ import { getModalMessage } from "./utils";
 import { ModalMessage } from "@/interfaces/IModal";
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm, context }) => {
-  const modalMessage: ModalMessage = getModalMessage(context);
+  const message: ModalMessage | undefined = getModalMessage(context);
 
-  if (!isOpen) {
+  if (!isOpen || !message) {
     return null;
   }
 
   const renderButtons = () => {
     switch (context) {
-      case "logout":
+      case "signout":
       case "addProduct":
       case "buy":
-      case "order":
+      case "createOrder":
         return (
           <>
             <button className={styles.closeButton} onClick={onClose}>No</button>
@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm, context }) =>
         <div className="relative flex flex-col w-full border-2 border-lightblue1 rounded-md shadow-lg outline-none focus:outline-none">
           {/* Header */}
           <div className="flex flex-col items-center justify-between p-5 bg-darkviolet rounded-t">
-            <h1 className="text-3xl font-semibold font-sans stroke-dv text-center underline gradient-text">{modalMessage.headerMessage}</h1>
+            <h1 className="text-3xl font-semibold font-sans stroke-dv text-center underline gradient-text">{message.headerMessage}</h1>
             <button
               className="absolute top-0 right-0 m-2 p-2 rounded-md bg-darkblue2 text-white border-2 border-lightviolet transition-colors duration-500 hover:bg-gradient-to-r from-red-400 via-red-600 to-red-400"
               onClick={onClose}
@@ -45,7 +45,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm, context }) =>
           {/* Body */}
           <div className="bg-gray2 relative p-6 flex-auto">
             <p className="my-4 text-xl leading-relaxed text-center text-darkblue1">
-              {modalMessage.bodyMessage}
+              {message.bodyMessage}
             </p>
           </div>
           {/* Footer */}

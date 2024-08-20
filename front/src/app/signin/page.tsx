@@ -1,29 +1,22 @@
 "use client";
-import { useState, useEffect } from "react";
-import { validateEmail, validatePassword } from "../helpers/loginValid";
+import { useState } from "react";
+import { validateEmail, validatePassword } from "../helpers/signInValid";
 import Image from "next/image";
 import { LogForm } from "@/interfaces/IForm";
 import { LogErrors } from "@/interfaces/IErrors";
-import { postLogin } from "@/lib/server/fetchUser";
+import { postSignIn } from "@/lib/server/fetchUser";
 import Modal from "@/components/Modal";
 import eyeO from "../../../public/images/eyeV.png";
 import eyeC from "../../../public/images/eyeNv.png";
+import { IUser } from "@/interfaces/IUser";
 
-const Login: React.FC = () => {
+const SignIn: React.FC = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState<LogForm>({email: "", password: ""});
+  const [formData, setFormData] = useState<LogForm>({ email: "", password: "" });
   const [errors, setErrors] = useState<LogErrors>({ email: "", password: "" });
-  const [token, setToken] = useState<string | null>(null);
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedToken = localStorage.getItem("token");
-      setToken(storedToken);
-    }
-  }, []);
+  const [user, setUser] = useState<IUser | null>(null);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -61,13 +54,12 @@ const Login: React.FC = () => {
       return;
     }
     try {
-      const result = await postLogin(formData);
+      const result = await postSignIn(formData);
       if (typeof window !== 'undefined') {
-        const { user } = result;
-        const { ...userData } = user; // Excluir id y contraseña
-        localStorage.setItem("token", user.credential.password); // Guardar la contraseña como "token"
-        localStorage.setItem("user", JSON.stringify(userData));
-        setUser(userData);
+        const { token, user } = result; // Asegúrate de que el backend devuelva un token
+        localStorage.setItem("token", token); // Guardar el token JWT
+        localStorage.setItem("user", JSON.stringify(user));
+        setUser(user);
       }
       setTimeout(() => {
         setShowSuccessModal(true);
@@ -77,7 +69,6 @@ const Login: React.FC = () => {
       setShowErrorModal(true);
     }
   };
-  
 
   return (
     <div className="flex flex-col justify-center items-center p-2 w-full">
@@ -91,7 +82,7 @@ const Login: React.FC = () => {
             type="text"
             id="email"
             name="email"
-            placeholder="Nombre de Usuario"
+            placeholder="E-mail"
             value={formData.email}
             onChange={handleChange}
             required
@@ -138,7 +129,7 @@ const Login: React.FC = () => {
         isOpen={showErrorModal}
         onClose={() => {
           setShowErrorModal(false);
-      }}
+        }}
         context="errorSignIn"
       />
       <Modal
@@ -153,4 +144,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignIn;

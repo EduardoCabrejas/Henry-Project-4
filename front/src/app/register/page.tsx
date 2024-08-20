@@ -212,7 +212,7 @@ const Register: React.FC = () => {
                     : "bg-gray2 cursor-not-allowed"
                 }`}
               >
-                Registrarse
+                Sign Up
               </button>
             </div>
           </form>

@@ -14,13 +14,13 @@ const Card: React.FC<CardProps> = ({
   image,
 }) => {
   return (
-    <div className="bg-darkviolet flex flex-col border border-lightblue1 p-3 rounded-lg shadow-lg">
+    <div className="bg-darkblue2 flex flex-col border border-lightblue1 p-3 rounded-lg shadow-lg">
       <img src={image} alt={name} width={250} height={200} className="m-auto" />
       <h2 className="text-xl font-semibold text-center m-2 md:text-2xl">
         {name}
       </h2>
       {/* <p className="text-white h-30 md:h-40">{description}</p> */}
-      <div className="bg-lightviolet border-2 border-darkblue1 text-white text-xl stroke-dv m-auto rounded-md p-1 text-center font-bold md:text-2xl">
+      <div className="bg-darkblue1 border-2 border-darkblue1 text-white text-xl stroke-dv m-auto rounded-md p-1 text-center font-bold md:text-2xl">
         <p>Price: ${price}</p>
         <p >Stock: {stock}</p>
       </div>

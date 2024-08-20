@@ -16,11 +16,10 @@ const Orders: React.FC = () => {
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
         setUser(JSON.parse(storedUser));
-        setLoading(false);
       } else {
         setShowErrorModal(true);
-        setLoading(false);
       }
+      setLoading(false);
     }
   }, []);
 
@@ -30,18 +29,25 @@ const Orders: React.FC = () => {
         setShowErrorModal(true);
         return;
       }
+
       try {
-        const response = await fetch('http://localhost:3001/users/orders', {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("Token is not available");
+        }
+
+        const response = await fetch('http://localhost:3000/users/orders', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Enviar el token en el encabezado
           },
-          body: JSON.stringify({ userId: user.id }),
         });
 
         if (!response.ok) {
           throw new Error("Failed to get orders");
         }
+
         const result = await response.json();
         setOrders(result);
       } catch (error) {
@@ -75,26 +81,43 @@ const Orders: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Orders</h1>
+    <div className="m-4">
+      <h1 className="text-xl text-center m-2 text-lightblue1 stroke-dv font-bold md:text-3xl">Orders</h1>
       {orders.length === 0 ? (
         <p>No orders found</p>
       ) : (
         orders.map((order) => (
-          <div key={order.id} className="order-item">
-            <h2>Order ID: {order.id}</h2>
-            <p>Status: {order.status}</p>
-            <p>Date: {new Date(order.date).toLocaleDateString()}</p>
-            <div>
-              <h3>Products:</h3>
-              {order.products.map((product) => (
-                <div key={product.id} className="product-item">
-                  <p>Name: {product.name}</p>
-                  <p>Price: ${product.price}</p>
-                  <Image src={product.image} alt={product.name} width={50} height={50} />
-                </div>
-              ))}
-            </div>
+          <div key={order.id} className="m-6">
+            <table className="w-full border-2 border-lightblue1 bg-lightblue2">
+              <tbody>
+                <tr>
+                  <td className="border-lightblue1 border-2 p-2 font-bold">Order ID:</td>
+                  <td className="border-lightblue1 border-2 p-2">{order.id}</td>
+                </tr>
+                <tr>
+                  <td className="border-lightblue1 border-2 p-2 font-bold">Status:</td>
+                  <td className="border-lightblue1 border-2 p-2">{order.status}</td>
+                </tr>
+                <tr>
+                  <td className="border-lightblue1 border-2 p-2 font-bold">Date:</td>
+                  <td className="border-lightblue1 border-2 p-2">{new Date(order.date).toLocaleDateString()}</td>
+                </tr>
+                <tr>
+                  <td className="border-lightblue1 border-2 p-2 font-bold">Products:</td>
+                  <td className="border-lightblue1 border-2 p-2">
+  <div className="grid grid-cols-5 gap-4 mt-4">
+    {order.products.map((product) => (
+      <div key={product.id} className="flex flex-col items-center bg-darkblue2 p-2 border border-gray-200 rounded-md">
+        <Image src={product.image} alt={product.name} width={100} height={100} className="mb-2" />
+        <p className="font-bold text-center">{product.name}</p>
+        <p className="text-center">Price: ${product.price}</p>
+      </div>
+    ))}
+  </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         ))
       )}

@@ -15,18 +15,20 @@ const Checkout: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUser = localStorage.getItem("user");
+      const storedProducts = localStorage.getItem("products");
+      const storedToken = localStorage.getItem("token"); // Token como string
+  
       if (storedUser) {
         setUser(JSON.parse(storedUser));
-        setLoading(false);
       } else {
         setShowErrorModal(true);
-        setLoading(false);
       }
-
-      const storedProducts = localStorage.getItem("products");
+  
       if (storedProducts) {
         setProducts(JSON.parse(storedProducts));
       }
+  
+      setLoading(false);
     }
   }, []);
 
@@ -46,29 +48,25 @@ const Checkout: React.FC = () => {
       if (!token) {
         throw new Error("Token is not available");
       }
-      console.log(token);
-      const response = await fetch('http://localhost:3001/orders', {
+      console.log(token)
+      const response = await fetch('http://localhost:3000/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`, // Usa el token como cadena
         },
         body: JSON.stringify(orderData),
       });
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`Failed to create order: ${errorText}`);
       }
-  
+
       const newOrder = await response.json();
       setShowOrderModal(true);
     } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error creating order:", error.message);
-      } else {
-        console.error("Unexpected error:", error);
-      }
+      console.error("Error creating order:", error instanceof Error ? error.message : error);
       setShowErrorModal(true);
     }
   };
@@ -102,15 +100,15 @@ const Checkout: React.FC = () => {
     <div className="m-4">
       <h1 className="text-xl text-center m-auto text-lightblue1 stroke-dv font-bold md:text-3xl">Checkout</h1>
       {products.length === 0 ? (
-        <p>Cart is empty</p>
+        <p className="text-center m-6">Cart is empty</p>
       ) : (
         products.map((product) => (
           <div key={product.id} className="grid grid-cols-4 bg-darkblue2 border-2 border-lightblue1 m-6 p-2 rounded-md">
             <h2 className="m-auto text-white stroke-dv text-xl font-bold text-center md:text-3xl">{product.name}</h2>
             <p className="text-white stroke-lb font-bold text-xl m-auto md:text-2xl">${product.price}</p>
-            <Image src={product.image} alt="product" width={100} height={100} className="m-auto" />
+            <Image src={product.image} alt={product.name} width={100} height={100} className="m-auto" />
             <button
-              className="m-auto p-4 flex flex-justify-center bg-red-600 border-2 border-lightblue1 rounded-md transition-colors duration-500 hover:bg-gradient-to-r from-red-400 via-red-600 to-red-400"
+              className="m-auto p-4 flex justify-center bg-red-600 border-2 border-lightblue1 rounded-md transition-colors duration-500 hover:bg-gradient-to-r from-red-400 via-red-600 to-red-400"
               onClick={() => handleRemoveProduct(product.id)}
             >
               Remove
@@ -122,7 +120,7 @@ const Checkout: React.FC = () => {
         className="flex justify-center m-auto w-1/2 text-2xl p-2 bg-green-950 text-lightblue1 border-2 border-lightblue1 rounded-md transition-colors duration-500 hover:bg-gradient-to-r from-lightblue2 via-darkblue1 to-lightblue2"
         onClick={handleCreateOrder}
       >
-        Place Order
+        Create Order
       </button>
       <Modal
         isOpen={showOrderModal}
@@ -131,16 +129,12 @@ const Checkout: React.FC = () => {
           setProducts([]);
           window.location.href = "/orders";
         }}
-        onClose={() => {
-          setShowOrderModal(false);
-        }}
-        context="order"
+        onClose={() => setShowOrderModal(false)}
+        context="createOrder"
       />
       <Modal
         isOpen={showErrorModal}
-        onClose={() => {
-          setShowErrorModal(false);
-        }}
+        onClose={() => setShowErrorModal(false)}
         context="errorOrder"
       />
     </div>
