@@ -56,8 +56,8 @@ const SignIn: React.FC = () => {
     try {
       const result = await postSignIn(formData);
       if (typeof window !== 'undefined') {
-        const { token, user } = result; // Asegúrate de que el backend devuelva un token
-        localStorage.setItem("token", token); // Guardar el token JWT
+        const { token, user } = result;
+        localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         setUser(user);
       }

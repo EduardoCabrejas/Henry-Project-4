@@ -16,7 +16,7 @@ const Checkout: React.FC = () => {
     if (typeof window !== "undefined") {
       const storedUser = localStorage.getItem("user");
       const storedProducts = localStorage.getItem("products");
-      const storedToken = localStorage.getItem("token"); // Token como string
+      const storedToken = localStorage.getItem("token");
   
       if (storedUser) {
         setUser(JSON.parse(storedUser));
@@ -48,12 +48,11 @@ const Checkout: React.FC = () => {
       if (!token) {
         throw new Error("Token is not available");
       }
-      console.log(token)
       const response = await fetch('http://localhost:3000/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Usa el token como cadena
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(orderData),
       });

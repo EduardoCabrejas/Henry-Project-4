@@ -195,7 +195,7 @@ const Register: React.FC = () => {
               <Image
                 className="right-2 ml-2 mb-2 w-9 h-8 bg-white rounded-md cursor-pointer p-1 border-2 border-lightblue1 hover:border-violet-900 hover:bg-lightblue1"
                 src={showPassword ? eyeO : eyeC}
-                alt={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                alt={showPassword ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
               />
             </div>
@@ -222,7 +222,7 @@ const Register: React.FC = () => {
         isOpen={showSuccessModal}
         onClose={() => {
           setShowSuccessModal(false);
-          window.location.href = '/home';
+          window.location.href = '/signin';
         }}
         context="register"
       />

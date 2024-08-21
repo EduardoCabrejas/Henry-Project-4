@@ -42,7 +42,6 @@ export const loginUserService = async (
     await checkPasswordService(loginUserDto.password, user.credential.password)
   ) {
     const token = jwt.sign({ userId: user.id }, JWT_SECRET);
-
     return {
       user,
       token,
